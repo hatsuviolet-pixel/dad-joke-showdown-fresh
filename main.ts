@@ -1,7 +1,9 @@
-import { writeFileSync, mkdirSync } from 'fs';
-import { join } from 'path';
-
+const fs = require('fs');
+const path = require('path');
 const joke = "I'm reading a book about anti-gravity. I can't put it down!";
-mkdirSync(join(process.cwd(), 'output'), { recursive: true });
-writeFileSync(join(process.cwd(), 'output', 'entry.txt'), joke);
-process.stdout.write(joke + '\n');
+const outDir = path.join(process.cwd(), 'output');
+if (!fs.existsSync(outDir)) {
+  fs.mkdirSync(outDir, { recursive: true });
+}
+fs.writeFileSync(path.join(outDir, 'entry.txt'), joke);
+console.log(joke);
